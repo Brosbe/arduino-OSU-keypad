@@ -7,6 +7,8 @@ const int pressBuffer = 1;
 
 const int treshold = 120;
 
+const int bottomOut = 10;
+
 int prevPress1;
 int prevPress2;
 
@@ -28,13 +30,14 @@ void loop()
   {
     if (mapped <= treshold) 
     {
+      
       if (mapped < prevPress1 && !isPressed1) 
       {
         Keyboard.press(115);
         isPressed1 = true;
       }
 
-      else if (mapped > prevPress1 && isPressed1) 
+      else if ((mapped > prevPress1 && isPressed1) && mapped > bottomOut) 
       {
         Keyboard.release(115);
         isPressed1 = false;
@@ -61,7 +64,7 @@ void loop()
         isPressed2 = true;
       }
 
-      else if (mapped > prevPress2 && isPressed2) 
+      else if ((mapped > prevPress2 && isPressed2) && mapped > bottomOut) 
       {
         Keyboard.release(100);
         isPressed2 = false;
